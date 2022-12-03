@@ -10,11 +10,17 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.15.6",
+    "axios": "^1.2.0",
+    "js-cookie": "^3.0.1",
+    "pinia": "^2.0.27",
     "quasar": "^2.10.2",
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.2.3",
+    "@types/js-cookie": "^3.0.2",
+    "@types/node": "^18.11.10",
     "@vitejs/plugin-vue": "^3.2.0",
     "prettier": "^2.8.0",
     "sass": "1.32.12",

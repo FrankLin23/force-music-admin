@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
+import * as path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -11,4 +12,9 @@ export default defineConfig({
       sassVariables: "src/quasar-variables.sass",
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src")
+    }
+  }
 });
