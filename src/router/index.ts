@@ -8,6 +8,30 @@ export const menuRoutes: RouteRecordRaw[] = [
     meta: { title: "Dashboard", icon: "dashboard" },
     component: () => import("@/pages/dashboard/index.vue"),
   },
+  {
+    path: "user",
+    name: "User",
+    meta: { title: "User Management", icon: "manage_accounts" },
+    component: () => import("@/pages/user/index.vue"),
+  },
+  {
+    path: "music",
+    name: "Music",
+    meta: { title: "Music Management", icon: "music_note" },
+    component: () => import("@/pages/music/index.vue"),
+  },
+  {
+    path: "artist",
+    name: "Artist",
+    meta: { title: "Artist Management", icon: "mic" },
+    component: () => import("@/pages/artist/index.vue"),
+  },
+  {
+    path: "playlist",
+    name: "Playlist",
+    meta: { title: "Playlist Management", icon: "queue_music" },
+    component: () => import("@/pages/playlist/index.vue"),
+  },
 ];
 
 const routes: RouteRecordRaw[] = [

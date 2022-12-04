@@ -6,7 +6,7 @@
         <q-toolbar-title>Force Music</q-toolbar-title>
         <q-space />
         <q-avatar color="teal" text-color="white">
-          nickname
+          {{ nicknameFirstWord }}
           <q-menu fit>
             <q-list style="min-width: 100px">
               <q-item clickable v-close-popup @click="logOut">
@@ -45,15 +45,22 @@
 <script setup lang="ts">
 import { menuRoutes } from "@/router";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useUserStore } from "@/store/modules/user";
 
 const route = useRoute();
 const leftDrawerOpen = ref(false);
+const store = useUserStore();
 
+const nicknameFirstWord = computed(() =>
+  store.user.nickname.slice(0, 1).toUpperCase()
+);
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
-const logOut = () => {};
+const logOut = () => {
+  store.logOut().then(() => window.location.reload());
+};
 </script>
 
 <style scoped lang="sass">

@@ -1,11 +1,23 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { createToken, me } from "@/api/user";
-import { getCurrentUser, setCurrentUser, setToken } from "@/utils/auth";
+import {
+  getCurrentUser,
+  removeCurrentUser,
+  removeToken,
+  setCurrentUser,
+  setToken,
+} from "@/utils/auth";
 
 export const useUserStore = defineStore("user", () => {
   const token = ref<string>("");
-  const user = ref(getCurrentUser());
+  const currentUser = ref(getCurrentUser());
+
+  const nicknameFirstWord = computed(() => {
+    return currentUser && currentUser.nickname
+      ? currentUser.nickname.slice(0, 1)
+      : "";
+  });
 
   const login = (username: string, password: string) => {
     return new Promise((resolve, reject) => {
@@ -25,7 +37,8 @@ export const useUserStore = defineStore("user", () => {
     return new Promise((resolve, reject) => {
       me()
         .then((res) => {
-          user.value = res.data;
+          console.log(res.data);
+          currentUser.value = res.data;
           setCurrentUser(res.data);
           resolve(res);
         })
@@ -33,5 +46,19 @@ export const useUserStore = defineStore("user", () => {
     });
   };
 
-  return { token, user, login, fetchCurrentUser };
+  const logOut = async () => {
+    removeToken();
+    removeCurrentUser();
+    token.value = "";
+    currentUser.value = null;
+  };
+
+  return {
+    token,
+    user: currentUser,
+    nicknameFirstWord,
+    login,
+    fetchCurrentUser,
+    logOut,
+  };
 });
