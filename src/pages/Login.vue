@@ -34,11 +34,28 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useUserStore } from "@/store/modules/user";
+import { useRoute, useRouter } from "vue-router";
+
+const store = useUserStore();
+const router = useRouter();
 
 const accept = ref(false);
 const username = ref("");
 const password = ref("");
-const onSubmit = (username: string, password: string) => {};
+const onSubmit = (username: string, password: string) => {
+  store
+    .login(username, password)
+    .then(() => {
+      store
+        .fetchCurrentUser()
+        .then(() => {
+          router.push("/");
+        })
+        .catch();
+    })
+    .catch();
+};
 </script>
 
 <style scoped>
